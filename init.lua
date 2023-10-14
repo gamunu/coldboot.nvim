@@ -43,6 +43,9 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- enable gui cursor
+vim.opt.guicursor = { 'a:ver25' }
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -73,14 +76,6 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
-
-  -- Copilot
-  {
-    'github/copilot.vim',
-    config = function()
-      vim.g.copilot_assume_mapped = true
-    end,
-  },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -215,6 +210,15 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  -- Copilot
+  {
+    'github/copilot.vim',
+    config = function()
+      vim.g.copilot_assume_mapped = true
+    end,
+  },
+
+  { 'mg979/vim-visual-multi' },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for coldboot
   --       These are some example plugins that I've included in the coldboot repository.
   --       Uncomment any of the lines below to enable them.
@@ -333,11 +337,11 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
-      'hcl', 'terraform' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'json', 'yaml', 'typescript',
+      'vimdoc', 'vim', 'hcl', 'terraform', 'markdown_inline' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-    auto_install = true,
+    auto_install = false,
 
     highlight = { enable = true },
     indent = { enable = true },
@@ -468,19 +472,35 @@ require('which-key').register({
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-  terraformls = {},
+  -- languages
+  gopls = {}, -- golang
+  eslint = {}, -- javascript
+  tsserver = {}, -- typescript
+  pyright = {}, -- python
+  rust_analyzer = {}, -- rust
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
     },
+  }, -- lua
+  -- clangd = {},
+  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+
+  -- others
+  sqlls = {},
+  marksman = {}, -- markdown
+  yamlls = {},
+  jsonls = {
+    init_options = {
+      provideFormatter = true,
+    },
   },
+
+  -- infrastrucutre
+  dockerls = {},
+  helm_ls = {},
+  terraformls = {},
 }
 
 -- Setup neovim lua configuration
