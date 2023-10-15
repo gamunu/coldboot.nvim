@@ -43,9 +43,6 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- enable gui cursor
-vim.opt.guicursor = { 'a:ver25' }
-
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -212,12 +209,27 @@ require('lazy').setup({
 
   -- Copilot
   {
-    'github/copilot.vim',
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = "InsertEnter",
     config = function()
-      vim.g.copilot_assume_mapped = true
-    end,
+      require('copilot').setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+        filetypes = {
+          yaml = true,
+          markdown = true,
+          gitcommit = true,
+        },
+      })
+    end
   },
-
+  {
+    'zbirenbaum/copilot-cmp',
+    config = function()
+      require('copilot_cmp').setup()
+    end
+  },
   { 'mg979/vim-visual-multi' },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for coldboot
   --       These are some example plugins that I've included in the coldboot repository.
@@ -473,10 +485,10 @@ require('which-key').register({
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- languages
-  gopls = {}, -- golang
-  eslint = {}, -- javascript
-  tsserver = {}, -- typescript
-  pyright = {}, -- python
+  gopls = {},         -- golang
+  eslint = {},        -- javascript
+  tsserver = {},      -- typescript
+  pyright = {},       -- python
   rust_analyzer = {}, -- rust
   lua_ls = {
     Lua = {
@@ -572,6 +584,7 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'copilot' },
     { name = 'luasnip' },
   },
 }
