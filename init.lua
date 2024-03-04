@@ -143,11 +143,10 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by VSCode
-    'gamunu/vscode.nvim',
+    'ellisonleao/gruvbox.nvim',
     priority = 1000,
     config = function()
-      vim.cmd [[colorscheme vscode]]
+      vim.cmd [[colorscheme gruvbox]]
     end,
   },
 
@@ -158,7 +157,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'vscode',
+        theme = 'gruvbox',
         component_separators = '|',
         section_separators = '',
       },
@@ -216,13 +215,8 @@ require('lazy').setup({
       require('copilot').setup({
         suggestion = { enabled = false },
         panel = { enabled = false },
-        filetypes = {
-          yaml = true,
-          markdown = true,
-          gitcommit = true,
-        },
       })
-    end
+    end,
   },
   {
     'zbirenbaum/copilot-cmp',
@@ -243,7 +237,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -349,11 +343,11 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'json', 'yaml', 'typescript',
-      'vimdoc', 'vim', 'hcl', 'terraform', 'markdown_inline' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'html', 'tsx', 'javascript', 'json', 'yaml', 'typescript',
+      'vimdoc', 'vim', 'hcl', 'terraform', 'markdown_inline', 'toml' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-    auto_install = false,
+    auto_install = true,
 
     highlight = { enable = true },
     indent = { enable = true },
@@ -485,11 +479,28 @@ require('which-key').register({
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- languages
-  gopls = {},         -- golang
-  eslint = {},        -- javascript
-  tsserver = {},      -- typescript
-  pyright = {},       -- python
-  rust_analyzer = {}, -- rust
+  gopls = {},    -- golang
+  eslint = {},   -- javascript
+  tsserver = {}, -- typescript
+  pyright = {},  -- python
+  rust_analyzer = {
+    ["rust-analyzer"] = {
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
+      procMacro = {
+        enable = true
+      },
+    }
+  }, -- rust
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -508,7 +519,8 @@ local servers = {
       provideFormatter = true,
     },
   },
-
+  taplo = {}, -- toml
+  html = {},
   -- infrastrucutre
   dockerls = {},
   helm_ls = {},
@@ -540,6 +552,16 @@ mason_lspconfig.setup_handlers {
   end
 }
 
+--[[
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(client)
+    for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+      vim.api.nvim_set_hl(0, group, {})
+    end
+  end,
+
+})
+--]]
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require 'cmp'
@@ -584,7 +606,7 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'copilot' },
+    { name = 'copilot', group_index = 2 },
     { name = 'luasnip' },
   },
 }
