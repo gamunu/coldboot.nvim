@@ -202,8 +202,16 @@ else
       ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'html', 'tsx', 'javascript', 'json', 'yaml', 'typescript',
         'vimdoc', 'vim', 'hcl', 'terraform', 'markdown_inline', 'toml' },
 
+      -- Install parsers synchronously (only applied to `ensure_installed`)
+      sync_install = false,
+
       -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
       auto_install = true,
+
+      -- List of parsers to ignore installing (or "all")
+      ignore_install = {},
+
+      modules = {},
 
       highlight = { enable = true },
       indent = { enable = true },
@@ -335,10 +343,10 @@ else
   --  define the property 'filetypes' to the map in question.
   local servers = {
     -- languages
-    gopls = {},  -- golang
-    eslint = {}, -- javascript
+    gopls = {},    -- golang
+    eslint = {},   -- javascript
     tsserver = {}, -- typescript
-    pyright = {}, -- python
+    pyright = {},  -- python
     rust_analyzer = {
       ["rust-analyzer"] = {
         imports = {
@@ -394,7 +402,20 @@ else
   local mason_lspconfig = require 'mason-lspconfig'
 
   mason_lspconfig.setup {
+    -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "lua_ls" }
+    -- This setting has no relation with the `automatic_installation` setting.
+    ---@type string[]
     ensure_installed = vim.tbl_keys(servers),
+
+    -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
+    -- This setting has no relation with the `ensure_installed` setting.
+    -- Can either be:
+    --   - false: Servers are not automatically installed.
+    --   - true: All servers set up via lspconfig are automatically installed.
+    --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
+    --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
+    ---@type boolean
+    automatic_installation = true,
   }
 
   mason_lspconfig.setup_handlers {

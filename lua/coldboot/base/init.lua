@@ -1,9 +1,10 @@
 -- NOTE  : this is where the neovim plugins are defined
 -- if you are looking for vscode specific plugins look for the coldboot/vscode
 -- directory
-return {                                       -- Git related plugins
-    'tpope/vim-fugitive', 'tpope/vim-rhubarb', -- Detect tabstop and shiftwidth automatically
-    'tpope/vim-sleuth',                        -- NOTE: This is where your plugins related to LSP can be installed.
+return {                 -- Git related plugins
+    'tpope/vim-fugitive',
+    'tpope/vim-rhubarb', -- Detect tabstop and shiftwidth automatically
+    'tpope/vim-sleuth',  -- NOTE: This is where your plugins related to LSP can be installed.
     {
         'stevearc/oil.nvim',
         opts = {
@@ -45,7 +46,8 @@ return {                                       -- Git related plugins
             {
                 'williamboman/mason.nvim',
                 config = true
-            }, 'williamboman/mason-lspconfig.nvim', -- Useful status updates for LSP
+            },
+            'williamboman/mason-lspconfig.nvim', -- Useful status updates for LSP
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
             {
                 'j-hui/fidget.nvim',
@@ -58,10 +60,11 @@ return {                                       -- Git related plugins
         -- Autocompletion
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
-        dependencies = {                                    -- Snippet Engine & its associated nvim-cmp source
-            'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', -- Adds LSP completion capabilities
-            'hrsh7th/cmp-nvim-lsp',                         -- Add LSP completion path
-            'hrsh7th/cmp-path',                             -- Adds a number of user-friendly snippets
+        dependencies = {                -- Snippet Engine & its associated nvim-cmp source
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip', -- Adds LSP completion capabilities
+            'hrsh7th/cmp-nvim-lsp',     -- Add LSP completion path
+            'hrsh7th/cmp-path',         -- Adds a number of user-friendly snippets
             'rafamadriz/friendly-snippets' },
         config = function()
             -- See `:help cmp`
@@ -268,7 +271,8 @@ return {                                       -- Git related plugins
     {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
-        dependencies = { 'nvim-lua/plenary.nvim', -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+        dependencies = {
+            'nvim-lua/plenary.nvim', -- Fuzzy Finder Algorithm which requires local dependencies to be built.
             -- Only load if `make` is available. Make sure you have the system
             -- requirements installed.
             {
