@@ -43,6 +43,26 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Set PowerShell as the default shell on Windows
+-- requires powershell to be installed
+-- sudo winget install --id Microsoft.Powershell --source winget
+if vim.fn.has('win32') > 0 or vim.fn.has('win64') > 0 then
+  vim.o.shell = vim.fn.executable('pwsh') > 0 and 'pwsh' or 'powershell'
+  vim.o.shellcmdflag = table.concat({
+    '-NoLogo',
+    '-NoProfile',
+    '-ExecutionPolicy',
+    'RemoteSigned',
+    '-Command',
+    '[Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;',
+  }, ' ')
+  vim.o.shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+  vim.o.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+  vim.o.shellquote = ''
+  vim.o.shellxquote = ''
+  vim.o.shellslash = true
+end
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
