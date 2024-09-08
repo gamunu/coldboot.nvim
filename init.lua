@@ -374,7 +374,7 @@ else
     -- languages
     gopls = {},    -- golang
     eslint = {},   -- javascript
-    tsserver = {}, -- typescript
+    ts_ls = {}, -- typescript
     pyright = {},  -- python
     rust_analyzer = {
       ["rust-analyzer"] = {
