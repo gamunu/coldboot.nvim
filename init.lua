@@ -78,7 +78,6 @@ if not vim.loop.fs_stat(lazypath) then
   }
 end
 vim.opt.rtp:prepend(lazypath)
-
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
 --
@@ -87,14 +86,21 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
   -- import pure neovim plugins
-  { import = 'coldboot.base',   cond = (function() return not vim.g.vscode end) },
+  { import = 'coldboot.plugins',   cond = (function() return not vim.g.vscode end) },
   { import = 'coldboot.vscode', cond = (function() return vim.g.vscode end) },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for coldboot
   --       These are some example plugins that I've included in the coldboot repository.
-  --       Uncomment any of the lines below to enable them.
+  --       Comment/Uncomment any of the lines below to enable/disable them.
   -- require 'coldboot.plugins.autoformat',
   -- require 'coldboot.plugins.debug',
+  require 'coldboot.plugins.copilot',
+  require 'coldboot.plugins.conform',
+  require 'coldboot.plugins.toggleterm',
+  require 'coldboot.plugins.oil',
+  require 'coldboot.plugins.rustaceanvim',
+  require 'coldboot.plugins.completion',
+  require 'coldboot.plugins.telescope',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -372,10 +378,10 @@ else
   --  define the property 'filetypes' to the map in question.
   local servers = {
     -- languages
-    gopls = {},    -- golang
-    eslint = {},   -- javascript
-    ts_ls = {}, -- typescript
-    pyright = {},  -- python
+    gopls = {},   -- golang
+    eslint = {},  -- javascript
+    ts_ls = {},   -- typescript
+    pyright = {}, -- python
     rust_analyzer = {
       ["rust-analyzer"] = {
         imports = {
@@ -468,54 +474,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 })
 --]]
-  -- [[ Configure nvim-cmp ]]
-  -- See `:help cmp`
-  local cmp = require 'cmp'
-  local luasnip = require 'luasnip'
-  require('luasnip.loaders.from_vscode').lazy_load()
-  luasnip.config.setup {}
-
-  cmp.setup {
-    snippet = {
-      expand = function(args)
-        luasnip.lsp_expand(args.body)
-      end,
-    },
-    mapping = cmp.mapping.preset.insert {
-      ['<C-n>'] = cmp.mapping.select_next_item(),
-      ['<C-p>'] = cmp.mapping.select_prev_item(),
-      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete {},
-      ['<CR>'] = cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
-      },
-      ['<Tab>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        elseif luasnip.expand_or_locally_jumpable() then
-          luasnip.expand_or_jump()
-        else
-          fallback()
-        end
-      end, { 'i', 's' }),
-      ['<S-Tab>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif luasnip.locally_jumpable(-1) then
-          luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end, { 'i', 's' }),
-    },
-    sources = {
-      { name = 'nvim_lsp' },
-      { name = 'luasnip' },
-      { name = 'path' },
-    },
-  }
 end
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

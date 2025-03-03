@@ -2,10 +2,4 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the coldboot.nvim README for more information
-return {
-    {
-        'mrcjkb/rustaceanvim',
-        version = '^4', -- Recommended
-        ft = { 'rust' }
-    }
-}
+return {}
