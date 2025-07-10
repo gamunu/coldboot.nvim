@@ -71,7 +71,7 @@ return {
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'path' },
-          { name = 'copilot' }, -- Add Copilot as first source
+          -- { name = 'copilot' }, -- Copilot disabled
         }, {
           { name = 'buffer' },
         }),

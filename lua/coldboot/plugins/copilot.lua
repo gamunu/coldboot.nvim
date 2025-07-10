@@ -3,6 +3,7 @@ return {
   -- Main Copilot plugin
   {
     "zbirenbaum/copilot.lua",
+    enabled = false, -- Disable Copilot
     cmd = "Copilot",
     event = "InsertEnter",
     opts = {
@@ -45,6 +46,7 @@ return {
   -- Configuration for copilot-cmp
   {
     "zbirenbaum/copilot-cmp",
+    enabled = false, -- Disable Copilot completion
     dependencies = { "zbirenbaum/copilot.lua" },
     config = function()
       -- Load copilot_cmp after copilot is loaded
