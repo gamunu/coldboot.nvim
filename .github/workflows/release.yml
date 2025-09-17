@@ -1,0 +1,22 @@
+name: Release Please
+
+on:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          # The release type (e.g., "simple", "node", "go", "python", etc.)
+          release-type: simple
+          # Optional: package name (defaults to repository name)
+          package-name: nvim-config
+          # Optional: changelog sections
+          changelog-sections: '[{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"docs","section":"Documentation","hidden":false},{"type":"style","section":"Styles","hidden":false},{"type":"refactor","section":"Code Refactoring","hidden":false},{"type":"test","section":"Tests","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false}]'
