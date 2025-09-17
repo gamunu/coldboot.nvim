@@ -46,8 +46,8 @@ vim.g.maplocalleader = ' '
 -- Set PowerShell as the default shell on Windows
 -- requires powershell to be installed
 -- sudo winget install --id Microsoft.Powershell --source winget
-if vim.fn.has('win32') > 0 or vim.fn.has('win64') > 0 then
-  vim.o.shell = vim.fn.executable('pwsh') > 0 and 'pwsh' or 'powershell'
+if vim.fn.has 'win32' > 0 or vim.fn.has 'win64' > 0 then
+  vim.o.shell = vim.fn.executable 'pwsh' > 0 and 'pwsh' or 'powershell'
   vim.o.shellcmdflag = table.concat({
     '-NoLogo',
     '-NoProfile',
@@ -86,21 +86,18 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
   -- import pure neovim plugins
-  { import = 'coldboot.plugins',   cond = (function() return not vim.g.vscode end) },
-  { import = 'coldboot.vscode', cond = (function() return vim.g.vscode end) },
-
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for coldboot
-  --       These are some example plugins that I've included in the coldboot repository.
-  --       Comment/Uncomment any of the lines below to enable/disable them.
-  -- require 'coldboot.plugins.autoformat',
-  -- require 'coldboot.plugins.debug',
-  require 'coldboot.plugins.conform',
-  require 'coldboot.plugins.toggleterm',
-  require 'coldboot.plugins.oil',
-  require 'coldboot.plugins.rustaceanvim',
-  require 'coldboot.plugins.completion',
-  require 'coldboot.plugins.telescope',
-  require 'coldboot.plugins.treesitter',
+  {
+    import = 'coldboot.plugins',
+    cond = function()
+      return not vim.g.vscode
+    end,
+  },
+  {
+    import = 'coldboot.vscode',
+    cond = function()
+      return vim.g.vscode
+    end,
+  },
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -197,24 +194,24 @@ else
   -- LSP configuration is now handled in the plugin files
 
   -- document existing key chains
-  require('which-key').add({
-    { "<leader>c",  group = "[C]ode" },
-    { "<leader>c_", hidden = true },
-    { "<leader>d",  group = "[D]ocument" },
-    { "<leader>d_", hidden = true },
-    { "<leader>g",  group = "[G]it" },
-    { "<leader>g_", hidden = true },
-    { "<leader>h",  group = "More git" },
-    { "<leader>h_", hidden = true },
-    { "<leader>r",  group = "[R]ename" },
-    { "<leader>r_", hidden = true },
-    { "<leader>s",  group = "[S]earch" },
-    { "<leader>s_", hidden = true },
-    { "<leader>w",  group = "[W]orkspace" },
-    { "<leader>w_", hidden = true },
-    { '<leader>t',  group = '[T]erminal' },
+  require('which-key').add {
+    { '<leader>c', group = '[C]ode' },
+    { '<leader>c_', hidden = true },
+    { '<leader>d', group = '[D]ocument' },
+    { '<leader>d_', hidden = true },
+    { '<leader>g', group = '[G]it' },
+    { '<leader>g_', hidden = true },
+    { '<leader>h', group = 'More git' },
+    { '<leader>h_', hidden = true },
+    { '<leader>r', group = '[R]ename' },
+    { '<leader>r_', hidden = true },
+    { '<leader>s', group = '[S]earch' },
+    { '<leader>s_', hidden = true },
+    { '<leader>w', group = '[W]orkspace' },
+    { '<leader>w_', hidden = true },
+    { '<leader>t', group = '[T]erminal' },
     { '<leader>t_', hidden = true },
-  })
+  }
 
   -- LSP configuration is now handled in the plugin files
 end

@@ -11,8 +11,24 @@ return {
       require('nvim-treesitter.configs').setup {
         -- Add languages to be installed here that you want installed for treesitter
         ensure_installed = {
-          'c', 'cpp', 'go', 'lua', 'python', 'rust', 'html', 'tsx', 'javascript', 'json', 'yaml', 'typescript',
-          'vimdoc', 'vim', 'hcl', 'terraform', 'markdown_inline', 'toml'
+          'c',
+          'cpp',
+          'go',
+          'lua',
+          'python',
+          'rust',
+          'html',
+          'tsx',
+          'javascript',
+          'json',
+          'yaml',
+          'typescript',
+          'vimdoc',
+          'vim',
+          'hcl',
+          'terraform',
+          'markdown_inline',
+          'toml',
         },
 
         -- Install parsers synchronously (only applied to `ensure_installed`)
