@@ -12,7 +12,7 @@ jobs:
     name: Format Check
     
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     
     - name: Setup Rust
       uses: actions-rs/toolchain@v1
@@ -32,7 +32,7 @@ jobs:
     name: Lint
     
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     
     - name: Setup Lua
       uses: leafo/gh-actions-lua@v10
@@ -53,7 +53,7 @@ jobs:
     name: Syntax Check
     
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     
     - name: Setup Lua
       uses: leafo/gh-actions-lua@v10
@@ -68,7 +68,7 @@ jobs:
     name: Neovim Config Test
     
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     
     - name: Setup Neovim
       uses: rhysd/action-setup-vim@v1
