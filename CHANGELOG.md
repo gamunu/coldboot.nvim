@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/gamunu/coldboot.nvim/compare/v1.0.0...v1.0.1) (2025-10-09)
+
+
+### Bug Fixes
+
+* add shortcuts to copy pate buffers ([#10](https://github.com/gamunu/coldboot.nvim/issues/10)) ([1f20ff5](https://github.com/gamunu/coldboot.nvim/commit/1f20ff51846bcbcb4f14b06e158369e7fad1515e))
+
 ## 1.0.0 (2025-09-17)
 
 
