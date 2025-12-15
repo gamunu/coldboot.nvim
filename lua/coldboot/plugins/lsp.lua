@@ -26,6 +26,17 @@ return {
       -- Setup neovim lua configuration
       require('neodev').setup()
 
+      local function enable_inlay_hints(client, bufnr)
+        if not client or not client.server_capabilities or not client.server_capabilities.inlayHintProvider then
+          return
+        end
+        if vim.lsp.inlay_hint and type(vim.lsp.inlay_hint) == 'table' and vim.lsp.inlay_hint.enable then
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        elseif vim.lsp.buf and vim.lsp.buf.inlay_hint then
+          vim.lsp.buf.inlay_hint(bufnr, true)
+        end
+      end
+
       -- Global LSP keymaps via LspAttach (universal, recommended pattern)
       local lsp_keys_grp = vim.api.nvim_create_augroup('UserLspKeys', { clear = true })
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -52,6 +63,8 @@ return {
           nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
           nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
           nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          local client = args.data and vim.lsp.get_client_by_id(args.data.client_id) or nil
+          enable_inlay_hints(client, bufnr)
         end,
       })
 
@@ -87,6 +100,8 @@ return {
         vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
           vim.lsp.buf.format()
         end, { desc = 'Format current buffer with LSP' })
+
+        enable_inlay_hints(client, bufnr)
       end
 
       -- Enable the following language servers
@@ -167,5 +182,9 @@ return {
         },
       }
     end,
+  },
+  {
+    'qvalentin/helm-ls.nvim',
+    ft = 'helm',
   },
 }

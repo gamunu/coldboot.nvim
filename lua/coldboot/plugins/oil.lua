@@ -10,6 +10,13 @@ return {
       default_file_explorer = true,
       -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
       delete_to_trash = true,
+      -- Reserve space for git status indicators injected by oil-git-status.nvim
+      win_options = {
+        signcolumn = 'yes:2',
+      },
+      lsp_file_methods = {
+        enabled = true,
+      },
       view_options = {
         -- Show files and directories that start with "."
         show_hidden = true,
@@ -34,5 +41,10 @@ return {
     },
     -- Optional dependencies
     dependencies = { 'nvim-tree/nvim-web-devicons' },
+  },
+  {
+    'refractalize/oil-git-status.nvim',
+    dependencies = { 'stevearc/oil.nvim' },
+    config = true,
   },
 }

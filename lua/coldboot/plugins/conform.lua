@@ -47,7 +47,7 @@ return {
         terraform = { 'terraform_fmt' },
         hcl = { 'terraform_fmt' },
         dockerfile = { 'dockerfmt' },
-        sql = { 'sqlformat' },
+        sql = { 'sqlfluff' },
         xml = { 'xmlformat' },
       },
       -- Set up format-on-save
