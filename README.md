@@ -78,6 +78,7 @@ You can also merge updates/changes from the repo back into your fork, to keep up
 ### Docs
 
 * [Git in Neovim (Neogit + Diffview)](doc/git.md)
+* [IDE setup (Coc.nvim + ALE)](doc/coc-ale.md)
 
 #### Example: Adding an autopairs plugin
 
