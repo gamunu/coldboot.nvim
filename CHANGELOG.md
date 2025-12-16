@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.0](https://github.com/gamunu/coldboot.nvim/compare/v1.0.1...v1.1.0) (2025-12-16)
+
+
+### Features
+
+* add coc and ale configuration ([#17](https://github.com/gamunu/coldboot.nvim/issues/17)) ([bb8df95](https://github.com/gamunu/coldboot.nvim/commit/bb8df95ff4acebd13455dabd26450b30dcd003e0))
+* add neogit and documenation ([#16](https://github.com/gamunu/coldboot.nvim/issues/16)) ([608ebf2](https://github.com/gamunu/coldboot.nvim/commit/608ebf25b2bdbc51b8db1ad21967817f74a28b52))
+* replace telescoep with fzf-lua ([#12](https://github.com/gamunu/coldboot.nvim/issues/12)) ([5e2438f](https://github.com/gamunu/coldboot.nvim/commit/5e2438fa2f8904b55a5cda0b1817518e2fd44e48))
+
 ## [1.0.1](https://github.com/gamunu/coldboot.nvim/compare/v1.0.0...v1.0.1) (2025-10-09)
 
 
