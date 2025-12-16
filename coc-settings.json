@@ -1,0 +1,38 @@
+{
+  "diagnostic.displayByAle": true,
+  "suggest.insertMode": "insert",
+  "inlayHint.display": true,
+  "inlayHint.enableParameter": true,
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.parameterTypes.enabled": true,
+  "typescript.inlayHints.variableTypes.enabled": true,
+  "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "typescript.inlayHints.enumMemberValues.enabled": true,
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "javascript.inlayHints.parameterTypes.enabled": true,
+  "javascript.inlayHints.variableTypes.enabled": true,
+  "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "javascript.inlayHints.enumMemberValues.enabled": true,
+  "rust-analyzer.inlayHints": {
+    "bindingModeHints": { "enable": true },
+    "chainingHints": { "enable": true },
+    "closingBraceHints": { "enable": true },
+    "closureReturnTypeHints": { "enable": "always" },
+    "lifetimeElisionHints": { "enable": "always", "useParameterNames": true },
+    "parameterHints": { "enable": true },
+    "typeHints": { "enable": true }
+  },
+  "go.goplsOptions": {
+    "hints": {
+      "assignVariableTypes": true,
+      "compositeLiteralFields": true,
+      "compositeLiteralTypes": true,
+      "constantValues": true,
+      "functionTypeParameters": true,
+      "parameterNames": true,
+      "rangeVariableTypes": true
+    }
+  }
+}
