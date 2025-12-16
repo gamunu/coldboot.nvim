@@ -2,8 +2,38 @@
 -- if you are looking for vscode specific plugins look for the coldboot/vscode
 -- directory
 return { -- Git related plugins
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb', -- Detect tabstop and shiftwidth automatically
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim',
+    },
+    keys = {
+      {
+        '<leader>gs',
+        function()
+          require('neogit').open()
+        end,
+        desc = '[G]it [S]tatus',
+      },
+    },
+    opts = {
+      kind = 'tab',
+      integrations = {
+        diffview = true,
+      },
+    },
+  },
+  {
+    'sindrets/diffview.nvim',
+    cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewFileHistory' },
+    keys = {
+      { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = '[G]it [D]iff view' },
+      { '<leader>gD', '<cmd>DiffviewClose<cr>', desc = '[G]it [D]iff close' },
+      { '<leader>gh', '<cmd>DiffviewFileHistory<cr>', desc = '[G]it file [H]istory' },
+    },
+    opts = {},
+  },
   'tpope/vim-sleuth', -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   -- LSP Configuration is now in lua/coldboot/plugins/lsp.lua
@@ -40,7 +70,7 @@ return { -- Git related plugins
           desc = 'Preview git hunk',
         })
 
-        -- don't override the built-in and fugitive keymaps
+        -- don't override the built-in diff keymaps
         local gs = package.loaded.gitsigns
         vim.keymap.set({ 'n', 'v' }, ']c', function()
           if vim.wo.diff then
