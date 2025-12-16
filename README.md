@@ -75,6 +75,10 @@ nvim --headless "+Lazy! sync" +qa
 
 You can also merge updates/changes from the repo back into your fork, to keep up-to-date with any changes for the default configuration.
 
+### Docs
+
+* [Git in Neovim (Neogit + Diffview)](doc/git.md)
+
 #### Example: Adding an autopairs plugin
 
 In the file: `lua/custom/plugins/autopairs.lua`, add:
@@ -157,4 +161,3 @@ This requires:
 ```lua
 {'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 ```
-
