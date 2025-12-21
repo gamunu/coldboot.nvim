@@ -32,7 +32,42 @@ return { -- Git related plugins
       { '<leader>gD', '<cmd>DiffviewClose<cr>', desc = '[G]it [D]iff close' },
       { '<leader>gh', '<cmd>DiffviewFileHistory<cr>', desc = '[G]it file [H]istory' },
     },
-    opts = {},
+    opts = function()
+      local actions = require 'diffview.actions'
+      local fold_descs = {
+        za = 'Toggle fold',
+        zA = 'Toggle fold recursively',
+        ze = 'Eliminate all folds',
+        zE = 'Eliminate all folds',
+        zo = 'Open fold',
+        zc = 'Close fold',
+        zO = 'Open fold recursively',
+        zC = 'Close fold recursively',
+        zr = 'Reduce folding',
+        zm = 'Fold more',
+        zR = 'Open all folds',
+        zM = 'Close all folds',
+        zv = 'Open folds to reveal cursor',
+        zx = 'Reapply foldlevel and open to cursor',
+        zX = 'Reapply foldlevel',
+        zn = 'Disable folding',
+        zN = 'Enable folding',
+        zi = 'Toggle foldenable',
+      }
+
+      local fold_keymaps = {}
+      for _, map in ipairs(actions.compat.fold_cmds) do
+        local mode, lhs, rhs = map[1], map[2], map[3]
+        local desc = fold_descs[lhs] or 'Fold command'
+        fold_keymaps[#fold_keymaps + 1] = { mode, lhs, rhs, { desc = desc } }
+      end
+
+      return {
+        keymaps = {
+          view = fold_keymaps,
+        },
+      }
+    end,
   },
   'tpope/vim-sleuth', -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -102,10 +137,13 @@ return { -- Git related plugins
     },
   },
   {
-    'ellisonleao/gruvbox.nvim',
+    'sainnhe/gruvbox-material',
+    lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd [[colorscheme gruvbox]]
+      vim.g.gruvbox_material_enable_italic = true
+      vim.g.ruvbox_material_background = 'hard'
+      vim.cmd.colorscheme 'gruvbox-material'
     end,
   },
   {
