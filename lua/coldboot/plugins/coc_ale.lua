@@ -11,6 +11,8 @@ return {
         'coc-pyright',
         'coc-go',
         'coc-rust-analyzer',
+        'coc-docker',
+        'coc-terraform',
       }
 
       local map = function(mode, lhs, rhs, desc, opts)
@@ -144,6 +146,7 @@ return {
         typescriptreact = { 'eslint', 'prettier' },
         rust = { 'rustfmt' },
         python = { 'isort', 'black' },
+        terraform = { 'terraform' },
       }
 
       vim.g.ale_linters = {
@@ -154,6 +157,8 @@ return {
         typescriptreact = { 'eslint' },
         rust = { 'clippy' },
         python = { 'ruff' },
+        dockerfile = { 'hadolint' },
+        terraform = { 'tflint' },
       }
 
       local format_is_enabled = vim.g.ale_fix_on_save == 1

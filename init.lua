@@ -112,6 +112,9 @@ require('lazy').setup({
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
+-- Prepend mason bin to PATH
+vim.env.PATH = vim.fn.stdpath 'data' .. '/mason/bin' .. ':' .. vim.env.PATH
+
 -- Set highlight on search
 vim.o.hlsearch = false
 

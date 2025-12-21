@@ -59,4 +59,3 @@ After resolving:
 - Undo a conflict choice you just applied: `u`
 - Discard file/hunk from Neogit status: `x`
 - Abort an in-progress rebase/merge: use the `r`/`m` popup actions (Neogit will show “abort/continue” options when applicable).
-

@@ -20,7 +20,7 @@ Distribution Alternatives:
 
 ### Installation
 
-> **NOTE** 
+> **NOTE**
 > [Backup](#FAQ) your previous configuration (if any exists)
 
 Requirements:
@@ -46,7 +46,7 @@ git clone https://github.com/gamunu/coldboot.nvim.git "${XDG_CONFIG_HOME:-$HOME/
 
 ```
 # on Windows
-git clone https://github.com/gamunu/coldboot.nvim.git %userprofile%\AppData\Local\nvim\ 
+git clone https://github.com/gamunu/coldboot.nvim.git %userprofile%\AppData\Local\nvim\
 ```
 
 ### Post Installation
@@ -61,7 +61,7 @@ nvim --headless "+Lazy! sync" +qa
 
 [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo (so that you have your own copy that you can modify) and then installing you can install to your machine using the methods above.
 
-> **NOTE**  
+> **NOTE**
 > Your fork's url will be something like this: `https://github.com/<your_github_username>/coldboot.nvim.git`
 
 ### Configuration And Extension

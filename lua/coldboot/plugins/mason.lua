@@ -22,9 +22,24 @@ return {
 
       -- Keep this list small: just the server binaries Coc commonly uses.
       local ensure_installed = {
+        -- LSP Servers
         'gopls',
         'rust-analyzer',
         'pyright',
+        'typescript-language-server',
+        'eslint-lsp',
+        'dockerfile-language-server',
+        'terraform-ls',
+
+        -- Linters & Formatters
+        'black',
+        'isort',
+        'ruff',
+        'goimports',
+        'golangci-lint',
+        'prettier',
+        'hadolint',
+        'tflint',
       }
 
       local function install(pkg_name)

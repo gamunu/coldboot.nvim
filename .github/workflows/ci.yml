@@ -10,76 +10,76 @@ jobs:
   format-check:
     runs-on: ubuntu-latest
     name: Format Check
-    
+
     steps:
     - uses: actions/checkout@v6
-    
+
     - name: Setup Rust
       uses: actions-rs/toolchain@v1
       with:
         toolchain: stable
         profile: minimal
         override: true
-    
+
     - name: Install stylua
       run: cargo install stylua
-    
+
     - name: Check Lua formatting
       run: make format-check
-  
+
   lint:
     runs-on: ubuntu-latest
     name: Lint
-    
+
     steps:
     - uses: actions/checkout@v6
-    
+
     - name: Setup Lua
       uses: leafo/gh-actions-lua@v12
       with:
         luaVersion: "5.1"
-    
+
     - name: Setup Luarocks
       uses: leafo/gh-actions-luarocks@v6
-    
+
     - name: Install luacheck
       run: luarocks install luacheck
-    
+
     - name: Lint Lua files
       run: make lint
-  
+
   syntax-check:
     runs-on: ubuntu-latest
     name: Syntax Check
-    
+
     steps:
     - uses: actions/checkout@v6
-    
+
     - name: Setup Lua
       uses: leafo/gh-actions-lua@v12
       with:
         luaVersion: "5.1"
-    
+
     - name: Check Lua syntax
       run: make check
-  
+
   neovim-test:
     runs-on: ubuntu-latest
     name: Neovim Config Test
-    
+
     steps:
     - uses: actions/checkout@v6
-    
+
     - name: Setup Neovim
       uses: rhysd/action-setup-vim@v1
       with:
         neovim: true
         version: stable
-    
+
     - name: Test Neovim configuration
       run: |
         # Basic syntax check
         nvim --headless -c "lua print('Configuration loaded successfully')" -c "qa!"
-        
+
         # Check for any immediate errors in plugin loading
         timeout 30s nvim --headless -c "lua require('lazy').setup({})" -c "qa!" || echo "Plugin setup test completed"
