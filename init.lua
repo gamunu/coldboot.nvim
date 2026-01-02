@@ -84,8 +84,6 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- NOTE: First, some plugins that don't require any configuration
-  -- import pure neovim plugins
   {
     import = 'coldboot.plugins',
     cond = function()
@@ -98,13 +96,6 @@ require('lazy').setup({
       return vim.g.vscode
     end,
   },
-
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the coldboot repo.
-  --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --
-  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'custom.plugins' },
 }, {})
 
@@ -114,6 +105,8 @@ require('lazy').setup({
 
 -- Prepend mason bin to PATH
 vim.env.PATH = vim.fn.stdpath 'data' .. '/mason/bin' .. ':' .. vim.env.PATH
+
+-- NOTE: LSP config is in lua/coldboot/config/lsp.lua
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -149,6 +142,8 @@ vim.wo.signcolumn = 'yes'
 -- Decrease update time
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
+vim.o.ttimeout = true
+vim.o.ttimeoutlen = 100
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -194,7 +189,7 @@ else
   vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
   vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
-  -- LSP configuration is now handled in the plugin files
+  require 'coldboot.config'
 
   -- document existing key chains
   require('which-key').add {
@@ -215,8 +210,6 @@ else
     { '<leader>t', group = '[T]erminal' },
     { '<leader>t_', hidden = true },
   }
-
-  -- LSP configuration is now handled in the plugin files
 end
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

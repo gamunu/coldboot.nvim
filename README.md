@@ -24,9 +24,8 @@ Distribution Alternatives:
 > [Backup](#FAQ) your previous configuration (if any exists)
 
 Requirements:
-* Make sure to review the readmes of the plugins if you are experiencing errors. In particular:
-  * [ripgrep](https://github.com/BurntSushi/ripgrep#installation) is required for multiple [telescope](https://github.com/nvim-telescope/telescope.nvim#suggested-dependencies) pickers.
-* See [Windows Installation](#Windows-Installation) if you have trouble with `telescope-fzf-native`
+* Make sure to review the readmes of the plugins if you are experiencing errors.
+  * [ripgrep](https://github.com/BurntSushi/ripgrep#installation) is required for `fzf-lua` live grep.
 
 Neovim's configurations are located under the following paths, depending on your OS:
 
@@ -68,10 +67,9 @@ nvim --headless "+Lazy! sync" +qa
 
 * Inside of your copy, feel free to modify any file you like! It's your copy!
 * Feel free to change any of the default options in `init.lua` to better suit your needs.
-* For adding plugins, there are 3 primary options:
-  * Add new configuration in `lua/custom/plugins/*` files, which will be auto sourced using `lazy.nvim` (uncomment the line importing the `custom/plugins` directory in the `init.lua` file to enable this)
-  * Modify `init.lua` with additional plugins.
-  * Include the `lua/coldboot/plugins/*` files in your configuration.
+* For adding plugins, there are 2 primary options:
+  * Add new configuration in `lua/custom/plugins/*` files (if you enable that import)
+  * Edit the single plugin spec entrypoint: `lua/coldboot/plugins/init.lua`
 
 You can also merge updates/changes from the repo back into your fork, to keep up-to-date with any changes for the default configuration.
 
@@ -151,14 +149,5 @@ Each PR, especially those which increase the line count, should have a descripti
 
 ### Windows Installation
 
-Installation may require installing build tools, and updating the run command for `telescope-fzf-native`
-
-See `telescope-fzf-native` documentation for [more details](https://github.com/nvim-telescope/telescope-fzf-native.nvim#installation)
-
-This requires:
-
-- Install CMake, and the Microsoft C++ Build Tools on Windows
-
-```lua
-{'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-```
+Some plugins may require build tools (e.g. CMake) on Windows.
+If you run into install/build errors, check the plugin's README and ensure you have the required toolchain installed.
