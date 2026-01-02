@@ -157,6 +157,16 @@ return { -- Git related plugins
         component_separators = '|',
         section_separators = '',
       },
+      winbar = {
+        lualine_c = {
+          { 'filename', path = 3, shorting_target = 40 },
+        },
+      },
+      inactive_winbar = {
+        lualine_c = {
+          { 'filename', path = 3, shorting_target = 40 },
+        },
+      },
     },
   },
   {
