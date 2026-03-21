@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/gamunu/coldboot.nvim/compare/v1.1.0...v1.2.0) (2026-03-21)
+
+
+### Features
+
+* simplify plugin and lualine configuration ([#21](https://github.com/gamunu/coldboot.nvim/issues/21)) ([fad598c](https://github.com/gamunu/coldboot.nvim/commit/fad598cae535bb4f5807709311a12e81f9bd2fcf))
+
+
+### Bug Fixes
+
+* add extra linters and update shortcuts ([#18](https://github.com/gamunu/coldboot.nvim/issues/18)) ([e479511](https://github.com/gamunu/coldboot.nvim/commit/e4795119f3cd0e77e7fd01dcafd9b4dbb2a2d5f5))
+
 ## [1.1.0](https://github.com/gamunu/coldboot.nvim/compare/v1.0.1...v1.1.0) (2025-12-16)
 
 
